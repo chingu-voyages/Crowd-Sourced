@@ -1,0 +1,63 @@
+// this sass is for all DEFAULT mixins
+@import './sizes.sass'
+
+// Adds vendor prefixes to a property
+=prefix($property, $value...)
+  @each $prefix in -webkit-, -moz-, -ms-, -o-, ""
+    #{$prefix}#{$property}: $value
+
+// Adds value prefixes to a property
+=prefix-value($property, $value, $prefixes: webkit ms moz)
+  @each $prefix in $prefixes
+    #{$property}: #{'-' + $prefix + '-' + $value}
+  #{$property}: #{$value}
+
+=hide-text
+  text-indent: 100%
+  white-space: nowrap
+  overflow: hidden
+
+// Adds a min-width media query.
+=min-width($pixels)
+  @media (min-width: $pixels)
+    @content
+
+// Adds a max-width media query
+=max-width($pixels)
+  @media (max-width: $pixels)
+    @content
+
+// break points media query
+=small-devices
+  +min-width($small-devices)
+    @content
+
+=medium-devices
+  +min-width($medium-devices)
+    @content
+
+=large-devices
+  +min-width($large-devices)
+    @content
+
+=extra-large-devices
+  +min-width($extra-large-devices)
+    @content
+
+// Adds a clearfix to an element.
+=clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+// Keyframes
+=keyframes($animation-name)
+  @-webkit-keyframes #{$animation-name}
+    @content
+  @-moz-keyframes #{$animation-name}
+    @content
+  @-o-keyframes #{$animation-name}
+    @content
+  @keyframes #{$animation-name}
+    @content
