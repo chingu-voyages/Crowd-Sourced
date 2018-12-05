@@ -1,0 +1,63 @@
+@import './mixins.sass'
+
+.nav-bar
+  width: 100%
+  .menu-icon
+    margin: auto
+    width: 32px
+    height: 32px
+    cursor: pointer
+    position: relative
+    margin: 7px auto
+    .line
+      background-color: black
+      width: 100%
+      height: 5px
+      position: absolute
+      transition: 500ms
+      border-radius: 5px
+      z-index: 200
+      &.top
+        margin-top: 7px
+      &.middle
+        margin-top: 13px
+      &.bottom
+        margin-top: 20px
+  .links-wrapper
+    width: 100%
+    height: 0
+    box-sizing: border-box
+    overflow-y: scroll
+    -webkit-overflow-scrolling: touch
+    transition: height 400ms
+    position: absolute
+    top: 0
+    z-index: 100
+    background-color: black
+    .links
+      padding: 0
+      text-align: center
+      margin: 61px 0 0 0
+      .link
+        font-size: 2rem
+        margin: 15px 0
+        list-style-type: none
+        a
+          color: white
+          &:hover
+            color: blue
+  &.active
+    z-index: 100
+    .menu-icon-wrapper
+      .menu-icon .line
+        background-color: white
+        &.top
+          transform: rotate(225deg)
+          margin-top: 50%
+        &.middle
+          opacity: 0
+        &.bottom
+          transform: rotate(-225deg)
+          margin-top: 50%
+    .links-wrapper
+      height: 100vh
