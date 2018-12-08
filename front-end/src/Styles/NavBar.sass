@@ -1,0 +1,115 @@
+@import './mixins.sass'
+
+.nav-bar
+  width: 100%
+  .menu-icon
+    margin: auto
+    width: 32px
+    height: 32px
+    cursor: pointer
+    position: relative
+    margin: 7px auto
+    .line
+      background-color: black
+      width: 100%
+      height: 5px
+      position: absolute
+      transition: 500ms
+      border-radius: 5px
+      z-index: 200
+      &.top
+        margin-top: 7px
+      &.middle
+        margin-top: 13px
+      &.bottom
+        margin-top: 20px
+  .links-wrapper
+    width: 100%
+    height: 0
+    box-sizing: border-box
+    overflow-y: scroll
+    -webkit-overflow-scrolling: touch
+    transition: height 400ms
+    position: absolute
+    top: 0
+    z-index: 100
+    background-color: black
+    .links
+      padding: 0
+      text-align: center
+      margin: 61px 0 0 0
+      .link
+        font-size: 2rem
+        margin: 15px 0
+        list-style-type: none
+        a
+          color: white
+          &:hover
+            color: blue
+  &.active
+    z-index: 100
+    .menu-icon-wrapper
+      .menu-icon .line
+        background-color: white
+        &.top
+          transform: rotate(225deg)
+          margin-top: 50%
+        &.middle
+          opacity: 0
+        &.bottom
+          transform: rotate(-225deg)
+          margin-top: 50%
+    .links-wrapper
+      height: 100vh
+  +large-devices
+    .menu-icon
+      display: none
+    .links-wrapper
+      z-index: initial
+      position: relative
+      height: initial !important
+      display: inline-block
+      background-color: initial
+      &::after
+        content: ""
+        display: block
+        height: 1px
+        width: calc(100% - 75px)
+        margin: auto
+        background-color: rgba(0,0,0, 0.16)
+      .links
+        margin: initial
+        width: initial
+        display: flex
+        .link
+          margin: 0
+          display: inline-block
+          padding: 15px 5px
+          margin: 0 5px
+          position: relative
+          font-size: 1.25rem
+          text-align: center
+          &:first-child
+            margin-left: auto
+          &:last-child
+            margin-right: 50px
+          &::after
+            content: ""
+            display: none
+            height: 1px
+            width: 100%
+            background-color: black
+            position: absolute
+            bottom: -1px
+            left: 0
+            z-index: 1000
+          &.current::after
+            display: block
+          a
+            color: black
+        // TODO: need better hover handling (bottom line should only change when a link is being hover instead of the whole list)
+        &.hover
+          .current::after
+            display: none
+          .link:hover::after
+            display: block
