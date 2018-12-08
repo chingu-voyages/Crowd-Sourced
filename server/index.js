@@ -14,7 +14,7 @@ const schema = require('./schema/schema');
 
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static(path.resolve(__dirname, '/front-end/build')));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
 app.use('/graphql', graphqlHTTP({
   schema,
@@ -26,7 +26,7 @@ app.get('/test', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/front-end/', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../build/', 'index.html'));
 });
 
 app.listen(PORT, function () {
