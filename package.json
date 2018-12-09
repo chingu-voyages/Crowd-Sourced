@@ -4,7 +4,9 @@
   "description": "Chingu Voyage Project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node ./server/index.js",
+    "heroku-prebuild": "cd server; npm install",
+    "heroku-postbuild": "mkdir build; cd client; npm install; npm run build; mv -v ./build/* ../build; rm -rf ../client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +20,5 @@
   },
   "homepage": "https://github.com/chingu-voyages/bears-project-13#readme",
   "dependencies": {
-    "express": "^4.16.4"
   }
 }
