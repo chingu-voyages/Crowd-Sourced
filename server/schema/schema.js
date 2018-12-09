@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 const Item = require('../models/item');
 const User = require('../models/user');
+const Campaign = require('../models/campaign');
 
 const { GraphQLObjectType,
         GraphQLString,
@@ -42,6 +43,23 @@ const UserType = new GraphQLObjectType({
   })
 });
 
+const CampaignType = new GraphQLObjectType({
+  name: 'Campaign',
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    category: { type: GraphQLString },
+    description: { type: GraphQLString },
+    location: { type: GraphQLInt },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      }
+    }
+  })
+});
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -64,7 +82,20 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return Item.find({});
       }
-    }
+    },
+    campaign: {
+      type: CampaignType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Campaign.findById(args.id);
+      }
+    },
+    campaigns: {
+      type: new GraphQLList(CampaignType),
+      resolve(parent, args) {
+        return Campaign.find({});
+      }
+    },    
   }
 });
 
@@ -101,6 +132,26 @@ const Mutation = new GraphQLObjectType({
               userId: args.userId
             });
             return item.save();
+            }
+          },
+          addCampaign: {
+            type: CampaignType,
+            args: {
+              name: { type: new GraphQLNonNull(GraphQLString) },
+              category: { type: new GraphQLNonNull(GraphQLString) },
+              description: { type: new GraphQLNonNull(GraphQLString) },
+              location: { type: new GraphQLNonNull(GraphQLInt) },
+              userId: { type: new GraphQLNonNull(GraphQLID) }
+            },
+            resolve(parent, args) {
+              let campaign = new Campaign({
+                name: args.name,
+                category: args.category,
+                description: args.description,
+                location: args.location,
+                userId: args.userId
+              });
+              return campaign.save();
             }
           }
       }
