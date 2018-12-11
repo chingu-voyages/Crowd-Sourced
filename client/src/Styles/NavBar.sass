@@ -40,12 +40,13 @@
       margin: 61px 0 0 0
       .link
         font-size: 2rem
-        margin: 15px 0
         list-style-type: none
         a
+          margin: 15px 0
+          display: block
           color: white
           &:hover
-            color: blue
+            color: #424242
   &.active
     z-index: 100
     .menu-icon-wrapper
@@ -82,34 +83,40 @@
         width: initial
         display: flex
         .link
-          margin: 0
           display: inline-block
-          padding: 15px 5px
-          margin: 0 5px
+          margin: 0
           position: relative
-          font-size: 1.25rem
+          font-size: 1.2rem
           text-align: center
           &:first-child
             margin-left: auto
           &:last-child
             margin-right: 50px
+            &::before
+              content: ""
+              display: block
+              position: absolute
+              padding: 20px 0 10px
+              top: calc(50% - .6rem)
+              left: 0
+              height: 1.2rem
+              width: 1px
+              background-color: rgba(0,0,0, 0.16)
           &::after
             content: ""
-            display: none
             height: 1px
             width: 100%
+            transition: 150ms width, 150ms left, opacity 200ms
             background-color: black
             position: absolute
             bottom: -1px
+            margin: auto
             left: 0
             z-index: 1000
+            opacity: 0
           &.current::after
-            display: block
+            opacity: 1
           a
+            margin: 0
+            padding: 20px 25px 10px
             color: black
-        // TODO: need better hover handling (bottom line should only change when a link is being hover instead of the whole list)
-        &.hover
-          .current::after
-            display: none
-          .link:hover::after
-            display: block
