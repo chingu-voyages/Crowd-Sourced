@@ -1,4 +1,18 @@
+@import './mixins.sass'
+
 footer
-  margin: 15px 0
-  .temp
-    font-size: .75rem
+  margin: 15px auto
+  font-size: .75rem
+  max-width: 95%
+  text-align: center
+
+  a
+    display: block
+  .sub-title
+    margin-bottom: 3px
+  .single-author
+    margin: 3px auto
+    display: block
+  +medium-devices
+    margin: 15px 0
+    text-align: right
