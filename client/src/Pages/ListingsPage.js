@@ -10,18 +10,18 @@ export default class ListingsPage extends Component {
           <SiteLinkCard
             link='/'
             size='lg'>
-            <div className='placeholder-image'></div>
+            <div className='card-img helper-image'></div>
             <span className='title'>View Resources</span>
             <div className='line'></div>
-            <p>See what other people are sharing and request their assistance</p>
+            <p>See what other people are sharing and request their assistance.</p>
           </SiteLinkCard>
           <SiteLinkCard
             link='/'
             size='lg'>
-            <div className='placeholder-image'></div>
+            <div className='card-img help-image'></div>
             <span className='title'>View Campaigns</span>
-            <div className='line'></div>  
-            <p>See what other people are looking for and offer them assistance</p>
+            <div className='line'></div>
+            <p>See what other people are looking for and offer them assistance.</p>
           </SiteLinkCard>
         </div>
       </div>
