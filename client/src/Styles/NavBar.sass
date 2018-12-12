@@ -1,7 +1,18 @@
 @import './mixins.sass'
 
+$line-color: rgba(255,255,255, 0.16)
+
 .nav-bar
   width: 100%
+  .menu-icon-wrapper
+    margin-bottom: 15px
+    &::after
+      content: ""
+      display: block
+      height: 1px
+      width: calc(100% - 75px)
+      margin: auto
+      background-color: $line-color
   .menu-icon
     margin: auto
     width: 32px
@@ -10,7 +21,7 @@
     position: relative
     margin: 7px auto
     .line
-      background-color: black
+      background-color: white
       width: 100%
       height: 5px
       position: absolute
@@ -33,19 +44,19 @@
     position: absolute
     top: 0
     z-index: 100
-    background-color: black
+    background-color: rgba(0,0,0,.6)
+    -webkit-backdrop-filter: blur(10px)
+    backdrop-filter: blur(10px)
     .links
       padding: 0
       text-align: center
       margin: 61px 0 0 0
       .link
-        font-size: 2rem
-        margin: 15px 0
+        font-size: 3em
         list-style-type: none
         a
-          color: white
-          &:hover
-            color: blue
+          margin: 15px 0
+          display: block
   &.active
     z-index: 100
     .menu-icon-wrapper
@@ -62,7 +73,7 @@
     .links-wrapper
       height: 100vh
   +large-devices
-    .menu-icon
+    .menu-icon-wrapper
       display: none
     .links-wrapper
       z-index: initial
@@ -70,46 +81,54 @@
       height: initial !important
       display: inline-block
       background-color: initial
+      -webkit-backdrop-filter: initial
+      backdrop-filter: initial
       &::after
         content: ""
         display: block
         height: 1px
         width: calc(100% - 75px)
         margin: auto
-        background-color: rgba(0,0,0, 0.16)
+        background-color: $line-color
       .links
         margin: initial
         width: initial
         display: flex
         .link
-          margin: 0
           display: inline-block
-          padding: 15px 5px
-          margin: 0 5px
+          margin: 0
           position: relative
-          font-size: 1.25rem
+          font-size: 1.2rem
           text-align: center
           &:first-child
             margin-left: auto
           &:last-child
             margin-right: 50px
+            &::before
+              content: ""
+              display: block
+              position: absolute
+              padding: 20px 0 10px
+              top: calc(50% - .6rem)
+              left: 0
+              height: 1.2rem
+              width: 1px
+              background-color: $line-color
           &::after
             content: ""
-            display: none
             height: 1px
             width: 100%
-            background-color: black
+            transition: 150ms width, 150ms left, opacity 200ms
+            background-color: white
             position: absolute
             bottom: -1px
+            margin: auto
             left: 0
             z-index: 1000
+            opacity: 0
           &.current::after
-            display: block
+            opacity: 1
           a
-            color: black
-        // TODO: need better hover handling (bottom line should only change when a link is being hover instead of the whole list)
-        &.hover
-          .current::after
-            display: none
-          .link:hover::after
-            display: block
+            margin: 0
+            padding: 20px 25px 10px
+            // color: black

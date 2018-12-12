@@ -3,10 +3,11 @@ import './Styles/App.css';
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import NavBar from './Components/NavBar';
-import HomePage from './Components/HomePage';
-import AboutPage from './Components/AboutPage';
-import ListingsPage from './Components/ListingsPage';
-import LoginPage from './Components/LoginPage';
+import Footer from './Components/Footer';
+import HomePage from './Pages/HomePage';
+import AboutPage from './Pages/AboutPage';
+import ListingsPage from './Pages/ListingsPage';
+import LoginPage from './Pages/LoginPage';
 
 // Component that uses withRouter to get current location and send it to the parent class using a callback
 // https://reacttraining.com/react-router/web/api/withRouter
@@ -55,11 +56,19 @@ class App extends Component {
       <Router>
         <div className='App'>
           <LocationListenerRouter locationcallback={this.updateLocation}/>
-          <NavBar currentPage={this.state.location}/>
+          <NavBar
+            links={{
+              '/': 'Home',
+              '/about': 'About',
+              '/listings': 'Listings',
+              '/login': 'Login'
+            }}
+            currentPage={this.state.location}/>
           <Route path='/' exact component={HomePage} />
           <Route path='/about' component={AboutPage} />
           <Route path='/listings' component={ListingsPage} />
           <Route path='/login' component={LoginPage} />
+          <Footer />
         </div>
       </Router>
     );

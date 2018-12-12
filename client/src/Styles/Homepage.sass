@@ -1,0 +1,37 @@
+@import './mixins.sass'
+
+.page.page-homepage
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  width: 95%
+  .title
+    order: 2
+    display: inline-block
+    h3
+      font-size: 2em
+    h1
+      font-size: 4em
+    .button
+      margin: 5px auto
+  .image-wrapper
+    order: 1
+    margin-bottom: 10px
+    min-height: 200px
+    width: 100%
+    display: inline-block
+    background-position: center
+    background-size: cover
+  +medium-devices
+    width: 90%
+    text-align: left
+    .title
+      order: initial
+      margin-right: 10%
+      padding: 15px 0
+      .button
+        margin: 5px 5px auto auto
+    .image-wrapper
+      order: initial
+      width: 35%
+      height: initial
