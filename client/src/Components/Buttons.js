@@ -22,6 +22,7 @@ export class LinkButton extends Component {
       <a
         className='button'
         href={this.props.link}>
+        {this.props.text}
       </a>
     )
   }

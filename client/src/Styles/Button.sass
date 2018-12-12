@@ -1,8 +1,12 @@
+@import 'colors.sass'
+
 .button
   padding: 15px 10px
-  border: 2px solid white
+  border: 2px solid $font-color
   border-radius: 10px
   cursor: pointer
   display: inline-block
-a.button
   font-weight: 800
+  transition: border-color 200ms
+  &:hover
+    border-color: $hover-color
