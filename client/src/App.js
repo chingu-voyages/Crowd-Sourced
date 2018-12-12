@@ -7,6 +7,8 @@ import Footer from './Components/Footer';
 import HomePage from './Pages/HomePage';
 import AboutPage from './Pages/AboutPage';
 import ListingsPage from './Pages/ListingsPage';
+import ListingsOffersPage from './Pages/ListingsOffersPage';
+import ListingsSeekersPage from './Pages/ListingsSeekersPage';
 import LoginPage from './Pages/LoginPage';
 
 // Component that uses withRouter to get current location and send it to the parent class using a callback
@@ -67,6 +69,8 @@ class App extends Component {
           <Route path='/' exact component={HomePage} />
           <Route path='/about' component={AboutPage} />
           <Route path='/listings' component={ListingsPage} />
+          <Route path='/offers' component={ListingsOffersPage} />
+          <Route path='/seekers' component={ListingsSeekersPage} />
           <Route path='/login' component={LoginPage} />
           <Footer />
         </div>

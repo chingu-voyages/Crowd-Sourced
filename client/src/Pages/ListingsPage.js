@@ -8,7 +8,7 @@ export default class ListingsPage extends Component {
       <div className='page page-listings'>
         <div className='cards-wrapper'>
           <SiteLinkCard
-            link='/'
+            link='/offers'
             size='lg'>
             <div className='card-img helper-image'></div>
             <span className='title'>View Resources</span>
@@ -16,7 +16,7 @@ export default class ListingsPage extends Component {
             <p>See what other people are sharing and request their assistance.</p>
           </SiteLinkCard>
           <SiteLinkCard
-            link='/'
+            link='/seekers'
             size='lg'>
             <div className='card-img help-image'></div>
             <span className='title'>View Campaigns</span>
