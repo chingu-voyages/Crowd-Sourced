@@ -106,6 +106,12 @@ If the api is external, link to api documentation. If not describe your api incl
 Explaining what database (and version) has been used. Provide download links.
 Documents your database design and schemas, relations etc...
 
+## Resources
+
+Some Resources we used:
+- https://feathericons.com
+- https://unsplash.com
+
 ## Licensing
 
 State what the license is and how to find the text version of the license.

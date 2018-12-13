@@ -1,0 +1,35 @@
+@import './colors.sass'
+@import './mixins.sass'
+
+.page.page-listings
+  width: 100%
+  .cards-wrapper
+    display: flex
+    flex-wrap: wrap
+    .card
+      padding: 20px
+      .card-img
+        -webkit-mask-size: contain
+        mask-size: contain
+        -webkit-marsk-size: contain
+        transition: color 200ms
+        width: 100%
+        height: 100px
+        margin-bottom: 10px
+        background-color: $font-color
+        &.helper-image
+          -webkit-mask: url('../Images/shield.svg') 50% 50% no-repeat
+        &.help-image
+          -webkit-mask: url('../Images/heart.svg') 50% 50% no-repeat
+      .title
+        font-size: 1.25rem
+        letter-spacing: .03rem
+      .line
+        width: 75%
+        height: 1px
+        background-color: $line-color
+        margin: 5px auto 0
+  +large-devices
+    .cards-wrapper
+      .card .card-img
+        height: 150px
