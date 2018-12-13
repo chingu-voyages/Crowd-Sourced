@@ -5,7 +5,7 @@ const parser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
 
-mongoose.connect('mongodb://chingu:test123@ds127944.mlab.com:27944/bears-13');
+mongoose.connect('mongodb://chingu:test123@ds127944.mlab.com:27944/bears-13', { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
   console.log('connected to db');
 });
