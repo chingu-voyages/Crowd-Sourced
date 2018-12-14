@@ -1,0 +1,49 @@
+@import './mixins.sass'
+@import './colors.sass'
+
+.page.page-nomatch
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  width: 95%
+  .image-container
+    margin-bottom: 10px
+    height: 125px
+    width: 100%
+    display: inline-block
+    background-position: center
+    background-size: contain
+    background-repeat: no-repeat
+    background-image: url('../Images/grid.svg')
+    animation: spin 20s linear infinite
+    animation-direction: alternate
+  .info-wrapper
+    margin-top: 10px
+    text-align: center
+    width: 80%
+    .button
+      margin: auto 5px
+    .line
+      width: 65%
+      height: 1px
+      background-color: $line-color
+      margin: 5px auto 0
+  +medium-devices
+    width: 90%
+    text-align: left
+    .info-wrapper
+      width: 35%
+      margin-left: 10%
+      padding: 15px 0
+    .image-container
+      height: 200px
+      width: 35%
+      text-align: left
+      .line
+        margin: auto 5px
+
++keyframes(spin)
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
