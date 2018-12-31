@@ -17,11 +17,13 @@ export default class TextInput extends Component {
   }
   render(){
     return(
-      <div className={`text-input ${this.state.isFocus ? 'focus' : ''}`}>
+      <div className={`text-input ${this.state.isFocus ? 'focus' : ''} ${this.props.hasError ? 'error' : ''}`}>
         <input
           type={this.props.type || 'text'}
           onFocus={()=>this.toggleFocus(true)}
           onBlur={()=>this.toggleFocus(false)}
+          value={this.props.value}
+          onChange={this.props.onChange}
           placeholder={this.props.placeholder}></input>
       </div>
     )
