@@ -9,6 +9,8 @@ import AboutPage from './Pages/AboutPage';
 import ListingsPage from './Pages/ListingsPage';
 import ListingsOffersPage from './Pages/ListingsOffersPage';
 import ListingsSeekersPage from './Pages/ListingsSeekersPage';
+import NewPage from './Pages/NewPage';
+import NewOffersPage from './Pages/NewOffersPage';
 import LoginPage from './Pages/LoginPage';
 import NoMatch from './Pages/NoMatch';
 
@@ -64,6 +66,7 @@ class App extends Component {
               '/': 'Home',
               '/about': 'About',
               '/listings': 'Listings',
+              '/new': 'New',
               '/login': 'Login'
             }}
             currentPage={this.state.location}/>
@@ -73,6 +76,8 @@ class App extends Component {
             <Route path='/listings' component={ListingsPage} />
             <Route path='/offers' component={ListingsOffersPage} />
             <Route path='/seekers' component={ListingsSeekersPage} />
+            <Route path='/new' component={NewPage} />
+            <Route path='/new-offers' component={NewOffersPage} />  
             <Route path='/login' component={LoginPage} />
             <Route component={NoMatch} />
           </Switch>

@@ -1,0 +1,41 @@
+.text-input
+  position: relative
+  margin: 10px 0
+  &::after
+    content: ""
+    display: block
+    background-color: white
+    width: 0
+    position: absolute
+    height: 1px
+    bottom: 0px
+    margin: 0 50%
+    transition: width 200ms, margin 200ms
+  input
+    background-color: rgba(0,0,0,0)
+    color: white
+    width: 100%
+    display: block
+    padding: 0 3px
+    min-height: 30px
+    margin: 0
+    outline: none
+    font-size: 1.1rem
+    border: 0px solid
+    border-bottom: 1px solid rgba(255,255,255,.4)
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    border-radius: 0
+    &::placeholder
+      color: rgba(255,255,255,.4)
+  &.focus::after
+    width: 100%
+    margin: 0%
+  &.error
+    input::placeholder
+      color: rgb(251, 85, 99)
+    &::after
+      width: 100%
+      margin: 0%
+      background-color: rgb(251, 85, 99)
