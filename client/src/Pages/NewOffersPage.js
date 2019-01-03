@@ -24,11 +24,12 @@ export default class NewOffersPage extends Component {
     // functions to check input's value (for now it just checs there is something)
     this.checkInput = {
       nameInput: (val) => val.length < 1,
-      emailInput: (val) => val.length < 1,
+      emailInput: (val) => !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(val),
       descriptionInput: (val) => val.length < 1
     }
     this.onInputChange = this.onInputChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    // this.validateEmail = this.validateEmail.bind(this);
   }
 
   onInputChange(e, inputKey){
@@ -41,8 +42,32 @@ export default class NewOffersPage extends Component {
     })
   }
 
+  // validateEmail(email) {
+  //   const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   console.log(regexp.test(email));
+  // }
+
+  // submitForm checks each input if it is valid before submitting. if there is at least one invalid input then it won't submit
   submitForm(){
-    console.log('submit');
+    let valuesChange = {};
+    let errorCount = 0;
+    for(let key in this.checkInput){
+      let val = this.state[key].val;
+      let hasError = this.checkInput[key](val);
+      if(hasError){
+        errorCount++;
+        valuesChange[key] = {
+          val: val,
+          hasError: hasError
+        }
+      }
+    }
+    if(errorCount > 0){
+      this.setState(valuesChange);
+      return false
+    }
+    // this.validateEmail(this.state.emailInput.val);
+    console.log('submit here');
   }
 
   render(){
