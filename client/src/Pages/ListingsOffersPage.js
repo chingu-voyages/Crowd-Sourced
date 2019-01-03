@@ -8,6 +8,7 @@ export default class ListingsOffersPage extends Component {
   render(){
     return(
       <div className='page page-offers'>
+        <SiteLinkCard link='/'>test</SiteLinkCard>
         <Query
           query={gql`
             {
