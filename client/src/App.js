@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Styles/App.css';
 import PropTypes from "prop-types";
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-dom';
 import NavBar from './Components/NavBar';
 import Footer from './Components/Footer';
 import HomePage from './Pages/HomePage';
@@ -9,7 +9,10 @@ import AboutPage from './Pages/AboutPage';
 import ListingsPage from './Pages/ListingsPage';
 import ListingsOffersPage from './Pages/ListingsOffersPage';
 import ListingsSeekersPage from './Pages/ListingsSeekersPage';
+import NewPage from './Pages/NewPage';
+import NewOffersPage from './Pages/NewOffersPage';
 import LoginPage from './Pages/LoginPage';
+import NoMatch from './Pages/NoMatch';
 
 // Component that uses withRouter to get current location and send it to the parent class using a callback
 // https://reacttraining.com/react-router/web/api/withRouter
@@ -63,15 +66,21 @@ class App extends Component {
               '/': 'Home',
               '/about': 'About',
               '/listings': 'Listings',
+              '/new': 'New',
               '/login': 'Login'
             }}
             currentPage={this.state.location}/>
-          <Route path='/' exact component={HomePage} />
-          <Route path='/about' component={AboutPage} />
-          <Route path='/listings' component={ListingsPage} />
-          <Route path='/offers' component={ListingsOffersPage} />
-          <Route path='/seekers' component={ListingsSeekersPage} />
-          <Route path='/login' component={LoginPage} />
+          <Switch>
+            <Route path='/' exact component={HomePage} />
+            <Route path='/about' component={AboutPage} />
+            <Route path='/listings' component={ListingsPage} />
+            <Route path='/offers' component={ListingsOffersPage} />
+            <Route path='/seekers' component={ListingsSeekersPage} />
+            <Route path='/new' component={NewPage} />
+            <Route path='/new-offers' component={NewOffersPage} />  
+            <Route path='/login' component={LoginPage} />
+            <Route component={NoMatch} />
+          </Switch>
           <Footer />
         </div>
       </Router>

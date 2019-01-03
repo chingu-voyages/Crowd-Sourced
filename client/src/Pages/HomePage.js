@@ -9,7 +9,7 @@ export default class HomePage extends Component {
       <div className='page page-homepage'>
         <div className='title'>
           <h3>Welcome to</h3>
-          <h1>Project<br/>Title</h1>
+          <h1>Crowdsourced</h1>
           <SiteButton
             link={'/about'}
             text='Learn More'/>

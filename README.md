@@ -1,79 +1,58 @@
-# bears-project-13
-Chingu Voyage Project
+<!-- ![Logo of the project](./images/logo.sample.png) -->
+# CrowdSourced
+<!-- # Name of the project &middot; [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/npm) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/your/your-project/blob/master/LICENSE)
+> Additional information or tag line -->
 
-![Logo of the project](./images/logo.sample.png)
+Chingu Voyage Project: A website that allows people to share resources they may not have a use for and also allow people who need resources to start a campaign, similar to gofundme (but no money) but for resources.
 
-# Name of the project &middot; [![Build Status](https://img.shields.io/travis/npm/npm/latest.svg?style=flat-square)](https://travis-ci.org/npm/npm) [![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/npm) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/your/your-project/blob/master/LICENSE)
-> Additional information or tag line
-
-A brief description of your project, what it is used for.
+Live Site: http://chingu-project.herokuapp.com
 
 ## Installing / Getting started
-
-A quick introduction of the minimal setup you need to get a hello world up &
-running.
 
 ```bash
 git clone git@github.com:chingu-voyages/bears-project-13.git
 # first install server side
 cd bears-project-13
 npm install
-# after that installs, next is react install
-cd front-end
-npm install
 ```
-
-Here you should say what actually happens when you execute the code above.
+This should install all scripts in /package.json, /server/package.json, and /client/package.json
 
 ## Developing
 
 ### Built With
-React, Express, Node, Sass
+Express, Node, Sass, GraphQL, React, React-router
 <!-- List main libraries, frameworks used including versions (React, Angular etc...) -->
 
-### Prerequisites
-What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links.
+<!-- ### Prerequisites
+What is needed to set up the dev environment. For instance, global dependencies or any other tools. include download links. -->
 
 
-### Setting up Dev
+### Setting up and running Dev
 
-Here's a brief intro about what a developer must do in order to start developing
-the project further:
+After you install all packages then to run dev
 
-```shell
-git clone https://github.com/your/your-project.git
-cd your-project/
-packagemanager install
+```bash
+npm run start-dev
 ```
 
-And state what happens step-by-step. If there is any virtual environment, local server or database feeder needed, explain here.
-
-### Building
-
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here. for example:
-
-```shell
-./configure
-make
-make install
-```
-
-Here again you should state what actually happens when the code above gets
-executed.
+This should start the express server and react server.
 
 ### Deploying / Publishing
-give instructions on how to build and release a new version
-In case there's some step you have to take that publishes this project to a
-server, this is the right time to state it.
 
-```shell
-packagemanager deploy your-project -s server.com -u username -p password
+This project is setup to be deployed to Heroku. I usually deploy to Heroku using the website not the command line.
+
+It has some scripts specifically for Heroku such as
+
+```bash
+npm run heroku-postbuild
 ```
 
-And again you'd need to tell what the previous code actually does.
+NOTE: this deletes the client folder
 
-## Versioning
+This script builds the react (client) side and moves the build to the root of the project in a folder called 'build' and finally it deletes the whole client folder to save space in heroku (cause we do not need the unbuilt react app in deployment).
+
+
+<!-- ## Versioning
 
 We can maybe use [SemVer](http://semver.org/) for versioning. For the versions available, see the [link to tags on this repository](/tags).
 
@@ -104,7 +83,7 @@ If the api is external, link to api documentation. If not describe your api incl
 ## Database
 
 Explaining what database (and version) has been used. Provide download links.
-Documents your database design and schemas, relations etc...
+Documents your database design and schemas, relations etc... -->
 
 ## Resources
 
@@ -112,6 +91,6 @@ Some Resources we used:
 - https://feathericons.com
 - https://unsplash.com
 
-## Licensing
+<!-- ## Licensing
 
-State what the license is and how to find the text version of the license.
+State what the license is and how to find the text version of the license. -->
