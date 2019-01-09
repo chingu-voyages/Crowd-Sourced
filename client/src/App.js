@@ -12,6 +12,7 @@ import AboutPage from './Pages/AboutPage';
 import ListingsPage from './Pages/ListingsPage';
 import ListingsOffersPage from './Pages/ListingsOffersPage';
 import ListingsSeekersPage from './Pages/ListingsSeekersPage';
+import SinglePostPage from './Pages/SinglePostPage';
 import NewPage from './Pages/NewPage';
 import NewOffersPage from './Pages/NewOffersPage';
 import LoginPage from './Pages/LoginPage';
@@ -83,17 +84,19 @@ class App extends Component {
               <Route path='/' exact component={HomePage} />
               <Route path='/about' component={AboutPage} />
               <Route path='/listings' component={ListingsPage} />
-              <Route path='/offers' component={ListingsOffersPage} />
-              <Route path='/seekers' component={ListingsSeekersPage} />
+              <Route path='/offers' exact component={ListingsOffersPage} />
+              <Route path='/offers/:id' component={SinglePostPage} />
+              <Route path='/seekers' exact component={ListingsSeekersPage} />
+              <Route path='/seekers/:id' component={SinglePostPage} />
               <Route path='/new' component={NewPage} />
-              <Route path='/new-offers' component={NewOffersPage} />  
+              <Route path='/new-offers' component={NewOffersPage} />
               <Route path='/login' component={LoginPage} />
               <Route component={NoMatch} />
             </Switch>
             <Footer />
           </div>
         </Router>
-      </ApolloProvider>      
+      </ApolloProvider>
     );
   }
 }
