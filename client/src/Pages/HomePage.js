@@ -8,7 +8,7 @@ const HomePage = () => {
 		<div className="page page-homepage">
 			<div className="title">
 				<h3>Welcome to</h3>
-				<h1>Crowdsourced</h1>
+				<h1>Crowd<br/>Sourced</h1>
 				<SiteButton link={'/about'} text="Learn More" />
 			</div>
 			<div style={{ backgroundImage: `url(${frontimage})` }} className="image-wrapper" />
@@ -17,4 +17,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

@@ -32,7 +32,6 @@ export default class NewOffersPage extends Component {
 		};
 		this.onInputChange = this.onInputChange.bind(this);
 		this.submitForm = this.submitForm.bind(this);
-		// this.validateEmail = this.validateEmail.bind(this);
 	}
 
 	onInputChange(e, inputKey) {
@@ -44,11 +43,6 @@ export default class NewOffersPage extends Component {
 			[inputKey]: newInput
 		});
 	}
-
-	// validateEmail(email) {
-	//   const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	//   console.log(regexp.test(email));
-	// }
 
 	// submitForm checks each input if it is valid before submitting. if there is at least one invalid input then it won't submit
 	submitForm() {
@@ -69,7 +63,6 @@ export default class NewOffersPage extends Component {
 			this.setState(valuesChange);
 			return false;
 		}
-		// this.validateEmail(this.state.emailInput.val);
 		console.log('submit here');
 	}
 
