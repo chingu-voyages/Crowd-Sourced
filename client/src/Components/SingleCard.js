@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../Styles/SingleCard.css';
 
-export default class SingleCard extends Component {
-  render(){
-    return(
-      <div
-        className='single-card'>
-        {this.props.children}
-      </div>
-    )
-  }
-}
+const SingleCard = (props) => {
+	return <div className="single-card">{props.children}</div>;
+};
+
+export default SingleCard;
