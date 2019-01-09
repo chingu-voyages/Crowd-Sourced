@@ -3,7 +3,10 @@ const graphqlHTTP = require('express-graphql');
 const path = require('path');
 const parser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 mongoose.connect('mongodb://chingu:test123@ds127944.mlab.com:27944/bears-13', { useNewUrlParser: true });
 mongoose.connection.once('open', () => {
