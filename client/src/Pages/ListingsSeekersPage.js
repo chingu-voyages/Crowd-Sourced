@@ -4,6 +4,9 @@ import gql from 'graphql-tag';
 import { SiteLinkCard } from '../Components/Card';
 import Loading from '../Components/Loading';
 import '../Styles/ListingsSeekersPage.css';
+import defaultImage from '../Images/heart.svg';
+// TODO: defaultImage should be replaced by image of listing
+
 
 const ListingsSeekersPage = () => {
 	return (
@@ -24,6 +27,9 @@ const ListingsSeekersPage = () => {
 					if (error) return <p>Error :(</p>;
 					return data.campaigns.map((campaign) => (
 						<SiteLinkCard link={`/seekers/${campaign.id}`} key={campaign.id}>
+							<div className='image-wrapper'>
+                <img src={defaultImage} alt='heart shape'/>
+              </div>
 							<h3>{campaign.name}</h3>
 							<p>Zip: {campaign.location}</p>
 						</SiteLinkCard>
