@@ -24,10 +24,6 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-app.get('/test', (req, res) => {
-  res.end(JSON.stringify([{test:"data"}]));
-});
-
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build/', 'index.html'));
 });

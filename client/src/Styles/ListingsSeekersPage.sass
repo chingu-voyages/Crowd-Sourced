@@ -1,7 +1,17 @@
+@import './mixins.sass'
+
 .page.page-seekers
   width: 100%
   height: 100%
   margin-top: 15px
-  .cards-wrapper
-    display: flex
-    flex-wrap: wrap
+  .card
+    .image-wrapper
+      width: 20%
+      margin: auto auto 5px auto
+      padding: 0 5px 5px
+      +medium-devices
+        width: 40%
+    p
+      margin: 5px auto
+  .loading
+    margin: auto
