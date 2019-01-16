@@ -26,6 +26,8 @@ export default class SingleCampaignPage extends Component{
                 campaign(id: "${this.state.key}") {
                   name
                   description
+                  location
+                  itemsNeeded
                 }
               }
             `}>
@@ -39,8 +41,16 @@ export default class SingleCampaignPage extends Component{
                   </div>
                   <h2>{data.campaign.name}</h2>
                   <p>
+                    Zip code: {data.campaign.location}
+                  </p>
+                  <p>
                     {data.campaign.description}
                   </p>
+                  <p>
+                    {data.campaign.itemsNeeded.map(item => {
+                      return <li>{item}</li>
+                    })}
+                  </p>                  
                 </SingleCard>
               )
             }}
