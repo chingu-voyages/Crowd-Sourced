@@ -9,8 +9,6 @@ const app = express();
 
 app.use(cors());
 
-console.log('db user',process.env.DB_USER);
-
 mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@ds127944.mlab.com:27944/bears-13`, {
 	useNewUrlParser: true
 });
