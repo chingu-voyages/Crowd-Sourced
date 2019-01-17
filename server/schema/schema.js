@@ -12,10 +12,12 @@ const ItemType = new GraphQLObjectType({
 		name: { type: GraphQLString },
 		category: { type: GraphQLString },
 		description: { type: GraphQLString },
+		location: { type: GraphQLInt },
+		email: { type: GraphQLString },
 		user: {
 			type: UserType,
 			resolve(parent, args) {
-				return User.findById(parent.userId);
+				return User.find({ email: parent.email });
 			}
 		}
 	})
@@ -119,6 +121,8 @@ const Mutation = new GraphQLObjectType({
 				name: { type: new GraphQLNonNull(GraphQLString) },
 				category: { type: new GraphQLNonNull(GraphQLString) },
 				description: { type: new GraphQLNonNull(GraphQLString) },
+				email: { type: new GraphQLNonNull(GraphQLString) },
+				location: { type: new GraphQLNonNull(GraphQLInt) }
 				//userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
 			resolve(parent, args) {
@@ -126,6 +130,8 @@ const Mutation = new GraphQLObjectType({
 					name: args.name,
 					category: args.category,
 					description: args.description,
+					email: args.email,
+					location: args.location
 					//userId: args.userId
 				});
 				return item.save();
@@ -138,7 +144,7 @@ const Mutation = new GraphQLObjectType({
 				category: { type: new GraphQLNonNull(GraphQLString) },
 				description: { type: new GraphQLNonNull(GraphQLString) },
 				location: { type: new GraphQLNonNull(GraphQLInt) },
-				itemsNeeded: { type: new GraphQLList(GraphQLString) },
+				itemsNeeded: { type: new GraphQLList(GraphQLString) }
 				//userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
 			resolve(parent, args) {
@@ -147,7 +153,7 @@ const Mutation = new GraphQLObjectType({
 					category: args.category,
 					description: args.description,
 					location: args.location,
-					itemsNeeded: args.itemsNeeded,
+					itemsNeeded: args.itemsNeeded
 					//userId: args.userId
 				});
 				return campaign.save();

@@ -5,6 +5,8 @@ const itemSchema = new Schema({
 	name: String,
 	category: String,
 	description: String,
+	location: Number,
+	email: String,
 	userId: String
 });
 
