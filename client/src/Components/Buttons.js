@@ -11,6 +11,15 @@ export const Button = (props) => {
 	);
 };
 
+// a button that is used on a form
+export const FormButton = (props) => {
+	return (
+		<button type='submit' onClick={props.onClick} className="button">
+			{props.text}
+		</button>
+	);
+};
+
 // a button that is a link
 export const LinkButton = (props) => {
 	return (

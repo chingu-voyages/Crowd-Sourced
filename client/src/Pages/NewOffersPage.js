@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import SingleCard from '../Components/SingleCard';
-import { Button } from '../Components/Buttons';
+import { FormButton } from '../Components/Buttons';
 import TextInput from '../Components/TextInput';
 import '../Styles/NewOffersPage.css';
+import {hasInput, emailCheck, zipCheck } from '../Components/InputChecks';
 
 const ADD_ITEM = gql`
 	mutation ItemMutation(
 		$name: String!
 		$description: String!
 		$category: String!
-		$location: String!
+		$location: Int!
 		$email: String!
 	) {
 		addItem(name: $name, description: $description, category: $category, location: $location, email: $email) {
@@ -24,41 +25,44 @@ const ADD_ITEM = gql`
 	}
 `;
 
+// TODO: type of in state should probably moved out somewhere else.
 export default class NewOffersPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			nameInput: {
+			name: {
 				val: '',
-				hasError: false
+				hasError: false,
+				typeof: 'String'
 			},
-			descriptionInput: {
+			description: {
 				val: '',
-				hasError: false
+				hasError: false,
+				typeof: 'String'
 			},
-			categoryInput: {
+			category: {
 				val: '',
-				hasError: false
+				hasError: false,
+				typeof: 'String'
 			},
-			emailInput: {
+			email: {
 				val: '',
-				hasError: false
+				hasError: false,
+				typeof: 'String'
 			},
-			locationInput: {
+			location: {
 				val: '',
-				hasError: false
+				hasError: false,
+				typeof: 'Integer'
 			}
 		};
 		// functions to check input's value (for now it just checs there is something)
 		this.checkInput = {
-			nameInput: (val) => val.length < 1,
-			emailInput: (val) =>
-				!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-					val
-				),
-			descriptionInput: (val) => val.length < 1,
-			categoryInput: (val) => val.length < 1,
-			locationInput: (val) => val.length < 1 && val.length <= 5
+			name: hasInput,
+			email: emailCheck,
+			description: hasInput,
+			category: hasInput,
+			location: zipCheck
 		};
 		this.onInputChange = this.onInputChange.bind(this);
 		this.submitForm = this.submitForm.bind(this);
@@ -67,7 +71,8 @@ export default class NewOffersPage extends Component {
 	onInputChange(e, inputKey) {
 		const newInput = {
 			val: e.target.value,
-			hasError: this.checkInput[inputKey](e.target.value)
+			hasError: !this.checkInput[inputKey](e.target.value),
+			typeof: this.state[inputKey].typeof
 		};
 		this.setState({
 			[inputKey]: newInput
@@ -75,97 +80,110 @@ export default class NewOffersPage extends Component {
 	}
 
 	// submitForm checks each input if it is valid before submitting. if there is at least one invalid input then it won't submit
-	submitForm() {
+	submitForm(add_function) {
 		let valuesChange = {};
 		let errorCount = 0;
+		let valuesSubmit = {};
 		for (let key in this.checkInput) {
 			let val = this.state[key].val;
-			let hasError = this.checkInput[key](val);
+			let hasError = !this.checkInput[key](val);
 			if (hasError) {
 				errorCount++;
 				valuesChange[key] = {
 					val: val,
-					hasError: hasError
+					hasError: hasError,
+					typeof: this.state[key].typeof
 				};
 			}
+			// some inputs are integers so we convert them here (errorcount and setState in the next lines should fix any values that are not valid)
+			if(this.state[key].typeof === 'Integer'){
+				val = parseInt(val, 10);
+			}
+			valuesSubmit[key] = val;
 		}
 		if (errorCount > 0) {
 			this.setState(valuesChange);
 			return false;
 		}
-		console.log('submit here');
+
+		// use mutation function to submit
+		add_function({variables: valuesSubmit});
 	}
 
 	render() {
-		const name = this.state.nameInput.val;
-		const description = this.state.descriptionInput.val;
-		const location = this.state.locationInput.val;
-		const email = this.state.emailInput.val;
-		const category = this.state.categoryInput.val;
+		const name = this.state.name.val;
+		const description = this.state.description.val;
+		const location = this.state.location.val;
+		const email = this.state.email.val;
+		const category = this.state.category.val;
 		return (
 			<div className="page page-newofffers">
 				<SingleCard>
 					<span className="title">New Offer</span>
 					<div className="line" />
-					<form>
-						<label>Name</label>
-						<TextInput
-							value={this.state['nameInput'].val}
-							onChange={(e) => this.onInputChange(e, 'nameInput')}
-							hasError={this.state['nameInput'].hasError}
-							placeholder="Item name"
-							required
-						/>
-						<label>Category</label>
-						<TextInput
-							value={this.state['categoryInput'].val}
-							onChange={(e) => this.onInputChange(e, 'categoryInput')}
-							hasError={this.state['categoryInput'].hasError}
-							placeholder="Item category"
-							required
-						/>
-						<label>Description</label>
-						<TextInput
-							value={this.state['descriptionInput'].val}
-							onChange={(e) => this.onInputChange(e, 'descriptionInput')}
-							hasError={this.state['descriptionInput'].hasError}
-							placeholder="Item description"
-							required
-						/>
-						<label>E-Mail</label>
-						<TextInput
-							value={this.state['emailInput'].val}
-							onChange={(e) => this.onInputChange(e, 'emailInput')}
-							type="email"
-							hasError={this.state['emailInput'].hasError}
-							placeholder="Your E-Mail"
-							required
-						/>
-						<label>Location</label>
-						<TextInput
-							value={this.state['locationInput'].val}
-							onChange={(e) => this.onInputChange(e, 'locationInput')}
-							hasError={this.state['locationInput'].hasError}
-							placeholder="Enter 5 digit zip code"
-							required
-						/>
-						<Mutation
-							mutation={ADD_ITEM}
-							variables={{
-								name,
-								description,
-								category,
-								email,
-								location
-							}}
-						>
-							{(addItem) => (
+					<Mutation
+						mutation={ADD_ITEM}
+						variables={{
+							name,
+							description,
+							category,
+							email,
+							location
+						}}
+					>
+						{(add_item, { loading, error })=>(
+							<form
+								onSubmit={e=>{
+									e.preventDefault();
+									this.submitForm(add_item)
+								}}>
+								<label>Name</label>
+								<TextInput
+									value={this.state['name'].val}
+									onChange={(e) => this.onInputChange(e, 'name')}
+									hasError={this.state['name'].hasError}
+									placeholder="Item name"
+									required
+								/>
+								<label>Category</label>
+								<TextInput
+									value={this.state['category'].val}
+									onChange={(e) => this.onInputChange(e, 'category')}
+									hasError={this.state['category'].hasError}
+									placeholder="Item category"
+									required
+								/>
+								<label>Description</label>
+								<TextInput
+									value={this.state['description'].val}
+									onChange={(e) => this.onInputChange(e, 'description')}
+									hasError={this.state['description'].hasError}
+									placeholder="Item description"
+									required
+								/>
+								<label>E-Mail</label>
+								<TextInput
+									value={this.state['email'].val}
+									onChange={(e) => this.onInputChange(e, 'email')}
+									type="email"
+									hasError={this.state['email'].hasError}
+									placeholder="Your E-Mail"
+									required
+								/>
+								<label>Location</label>
+								<TextInput
+									value={this.state['location'].val}
+									onChange={(e) => this.onInputChange(e, 'location')}
+									hasError={this.state['location'].hasError}
+									placeholder="Enter 5 digit zip code"
+									required
+								/>
 								<div className="button-wrapper">
-									<Button onClick={addItem} text="Submit" />
+									<FormButton text="Submit" />
 								</div>
-							)}
-						</Mutation>
-					</form>
+							</form>
+						)}
+					</Mutation>
 				</SingleCard>
 			</div>
 		);
