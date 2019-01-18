@@ -1,10 +1,31 @@
 import React, { Component } from 'react';
-import SingleCard from '../Components/SingleCard';
 import '../Styles/SingleCampaignPage.css';
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
-import Loading from '../Components/Loading';
+import SingleCardQuery from '../Components/SingleCardQuery';
+import ErrorQuery from '../Components/ErrorQuery';
+import heartImage from '../Images/heart.svg';
 
+
+function SuccessComp(props){
+  return(
+    <div>
+      <div className='image-wrapper'>
+        <img src={heartImage} alt='heart'/>
+      </div>
+      <h2>{props.data.campaign.name}</h2>
+      <div className='line'></div>
+      <p>
+        Zip code: {props.sdata.campaign.location}
+      </p>
+      <p>
+        {props.data.campaign.description}
+      </p>
+      <p>
+        {props.data.campaign.itemsNeeded.map(item => <li>{item}</li>)}
+      </p>
+    </div>
+  )
+}
 
 export default class SingleCampaignPage extends Component{
   constructor(props){
@@ -20,7 +41,7 @@ export default class SingleCampaignPage extends Component{
     return(
       <div className='page single-campaign'>
         {!this.state.key ? '' : (
-          <Query
+          <SingleCardQuery
             query={gql`
               {
                 campaign(id: "${this.state.key}") {
@@ -30,31 +51,10 @@ export default class SingleCampaignPage extends Component{
                   itemsNeeded
                 }
               }
-            `}>
-            {({loading, error, data}) =>{
-              if(loading) return <Loading/>;
-              if(error) return <p>Error</p>;
-              return (
-                <SingleCard>
-                  <div clasName='image-wrapper'>
-                    <image src='' alt='shield'/>
-                  </div>
-                  <h2>{data.campaign.name}</h2>
-                  <p>
-                    Zip code: {data.campaign.location}
-                  </p>
-                  <p>
-                    {data.campaign.description}
-                  </p>
-                  <p>
-                    {data.campaign.itemsNeeded.map(item => {
-                      return <li>{item}</li>
-                    })}
-                  </p>                  
-                </SingleCard>
-              )
-            }}
-          </Query>
+            `}
+            errorComponent={ErrorQuery}
+            successComponent={SuccessComp}
+            />
         )}
       </div>
     )
