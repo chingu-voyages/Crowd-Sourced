@@ -119,14 +119,14 @@ const Mutation = new GraphQLObjectType({
 				name: { type: new GraphQLNonNull(GraphQLString) },
 				category: { type: new GraphQLNonNull(GraphQLString) },
 				description: { type: new GraphQLNonNull(GraphQLString) },
-				userId: { type: new GraphQLNonNull(GraphQLID) }
+				//userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
 			resolve(parent, args) {
 				let item = new Item({
 					name: args.name,
 					category: args.category,
 					description: args.description,
-					userId: args.userId
+					//userId: args.userId
 				});
 				return item.save();
 			}
@@ -139,7 +139,7 @@ const Mutation = new GraphQLObjectType({
 				description: { type: new GraphQLNonNull(GraphQLString) },
 				location: { type: new GraphQLNonNull(GraphQLInt) },
 				itemsNeeded: { type: new GraphQLList(GraphQLString) },
-				userId: { type: new GraphQLNonNull(GraphQLID) }
+				//userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
 			resolve(parent, args) {
 				let campaign = new Campaign({
@@ -148,7 +148,7 @@ const Mutation = new GraphQLObjectType({
 					description: args.description,
 					location: args.location,
 					itemsNeeded: args.itemsNeeded,
-					userId: args.userId
+					//userId: args.userId
 				});
 				return campaign.save();
 			}

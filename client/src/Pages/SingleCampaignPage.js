@@ -15,7 +15,13 @@ function SuccessComp(props){
       <h2>{props.data.campaign.name}</h2>
       <div className='line'></div>
       <p>
+        Zip code: {props.sdata.campaign.location}
+      </p>
+      <p>
         {props.data.campaign.description}
+      </p>
+      <p>
+        {props.data.campaign.itemsNeeded.map(item => <li>{item}</li>)}
       </p>
     </div>
   )
@@ -41,6 +47,8 @@ export default class SingleCampaignPage extends Component{
                 campaign(id: "${this.state.key}") {
                   name
                   description
+                  location
+                  itemsNeeded
                 }
               }
             `}
