@@ -15,7 +15,7 @@ function SuccessComp(props){
       <h2>{props.data.campaign.name}</h2>
       <div className='line'></div>
       <p>
-        Zip code: {props.sdata.campaign.location}
+        Zip code: {props.data.campaign.location}
       </p>
       <p>
         {props.data.campaign.description}
