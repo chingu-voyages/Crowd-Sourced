@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
-import SingleCard from '../Components/SingleCard';
 import '../Styles/SingleOfferPage.css';
 import gql from "graphql-tag";
-import { Query } from "react-apollo";
-import Loading from '../Components/Loading';
+import SingleCardQuery from '../Components/SingleCardQuery';
+import ErrorQuery from '../Components/ErrorQuery';
+import shieldImage from '../Images/shield.svg';
 
+function SuccessComp(props){
+  return(
+    <div>
+      <div className='image-wrapper'>
+        <img src={shieldImage} alt='shield'/>
+      </div>
+      <h2>{props.data.item.name}</h2>
+      <div className='line'></div>
+      <p>
+        {props.data.item.category}
+      </p>
+    </div>
+  )
+}
 
 export default class SingleOfferPage extends Component{
   constructor(props){
@@ -20,31 +34,19 @@ export default class SingleOfferPage extends Component{
     return(
       <div className='page single-offer'>
         {!this.state.key ? '' : (
-          <Query
+          <SingleCardQuery
             query={gql`
               {
-                item(id: "${this.state.key}") {
+                item(id: "${this.state.key}"){
                   name
+                  description
                   category
                 }
               }
-            `}>
-            {({loading, error, data}) =>{
-              if(loading) return <Loading/>;
-              if(error) return <p>Error</p>;
-              return (
-                <SingleCard>
-                  <div clasName='image-wrapper'>
-                    <image src='' alt='shield'/>
-                  </div>
-                  <h2>{data.item.name}</h2>
-                  <p>
-                    {data.item.category}
-                  </p>
-                </SingleCard>
-              )
-            }}
-          </Query>
+            `}
+            errorComponent={ErrorQuery}
+            successComponent={SuccessComp}
+            />
         )}
       </div>
     )
