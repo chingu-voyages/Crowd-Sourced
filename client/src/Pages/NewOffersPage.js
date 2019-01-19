@@ -8,6 +8,14 @@ import TextInput from '../Components/TextInput';
 import '../Styles/NewOffersPage.css';
 import {hasInput, emailCheck, zipCheck } from '../Components/InputChecks';
 
+function SuccessComp(){
+	return(
+		<div className='success-message'>
+			<p>Thank You for submitting a listing.</p>
+		</div>
+	)
+}
+
 const ADD_ITEM = gql`
 	mutation ItemMutation(
 		$name: String!
@@ -31,6 +39,7 @@ export default class NewOffersPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			successSubmit: false,
 			name: {
 				val: '',
 				hasError: false,
@@ -119,10 +128,11 @@ export default class NewOffersPage extends Component {
 		const category = this.state.category.val;
 		return (
 			<div className="page page-newofffers">
-				<SingleCard>
-					<span className="title">New Offer</span>
+				<SingleCard className={this.state.successSubmit ? 'success' : ''}>
+					<span className="title">{this.state.successSubmit ? 'Success!' : 'New Offer'}</span>
 					<div className="line" />
 					<Mutation
+						onCompleted={()=> this.setState({successSubmit: true})}
 						mutation={ADD_ITEM}
 						variables={{
 							name,
@@ -185,6 +195,7 @@ export default class NewOffersPage extends Component {
 									</div>
 								</form>
 								{loading && <div className='loading-cover'><Loading/></div>}
+								<SuccessComp />
 							</div>
 						)}
 					</Mutation>
