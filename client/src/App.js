@@ -59,7 +59,7 @@ class App extends Component {
                 '/about': 'About',
                 '/listings': 'Listings',
                 '/new': 'New',
-                '/login': 'Login'
+                // '/login': 'Login'
               }}
               currentPage={this.state.location}/>
             <Routes />
