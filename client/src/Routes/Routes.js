@@ -10,6 +10,7 @@ import SingleOfferPage from '../Pages/SingleOfferPage';
 import SingleCampaignPage from '../Pages/SingleCampaignPage';
 import NewPage from '../Pages/NewPage';
 import NewOffersPage from '../Pages/NewOffersPage';
+import NewCampaignPage from '../Pages/NewCampaignPage';
 import LoginPage from '../Pages/LoginPage';
 import NoMatch from '../Pages/NoMatch';
 
@@ -25,6 +26,7 @@ export default function Routes(){
       <Route exact path='/seekers/:id' component={SingleCampaignPage} />
       <Route exact path='/new' component={NewPage} />
       <Route exact path='/new-offers' component={NewOffersPage} />
+      <Route exact path='/new-seekers' component={NewCampaignPage} />
       <Route exact path='/login' component={LoginPage} />
       <Route component={NoMatch} />
     </Switch>

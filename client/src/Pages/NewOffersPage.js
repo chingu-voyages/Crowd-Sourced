@@ -79,13 +79,11 @@ export default class NewOffersPage extends Component {
 	}
 
 	onInputChange(e, inputKey) {
-		const newInput = {
-			val: e.target.value,
-			hasError: !this.checkInput[inputKey](e.target.value),
-			typeof: this.state[inputKey].typeof
-		};
+		let inputState = {...this.state[inputKey]};
+		inputState.val = e.target.value;
+		inputState.hasError = !this.checkInput[inputKey](e.target.value);
 		this.setState({
-			[inputKey]: newInput
+			[inputKey]: inputState
 		});
 	}
 
@@ -95,21 +93,14 @@ export default class NewOffersPage extends Component {
 		let errorCount = 0;
 		let valuesSubmit = {};
 		for (let key in this.checkInput) {
-			let val = this.state[key].val;
-			let hasError = !this.checkInput[key](val);
-			if (hasError) {
+			let inputState = {...this.state[key]};
+			inputState.hasError = !this.checkInput[key](inputState.val);
+			if(inputState.hasError){
 				errorCount++;
-				valuesChange[key] = {
-					val: val,
-					hasError: hasError,
-					typeof: this.state[key].typeof
-				};
+				valuesChange[key] = inputState;
 			}
 			// some inputs are integers so we convert them here (errorcount and setState in the next lines should fix any values that are not valid)
-			if(this.state[key].typeof === 'Integer'){
-				val = parseInt(val, 10);
-			}
-			valuesSubmit[key] = val;
+			valuesSubmit[key] = inputState.typeof === 'Integer' ? parseInt(inputState.val, 10) : inputState.val;
 		}
 		if (errorCount > 0) {
 			this.setState(valuesChange);
@@ -121,11 +112,6 @@ export default class NewOffersPage extends Component {
 	}
 
 	render() {
-		const name = this.state.name.val;
-		const description = this.state.description.val;
-		const location = this.state.location.val;
-		const email = this.state.email.val;
-		const category = this.state.category.val;
 		return (
 			<div className="page page-newofffers">
 				<SingleCard className={this.state.successSubmit ? 'success' : ''}>
@@ -133,15 +119,7 @@ export default class NewOffersPage extends Component {
 					<div className="line" />
 					<Mutation
 						onCompleted={()=> this.setState({successSubmit: true})}
-						mutation={ADD_ITEM}
-						variables={{
-							name,
-							description,
-							category,
-							email,
-							location
-						}}
-					>
+						mutation={ADD_ITEM}>
 						{(add_item, { loading, error })=>(
 							<div className='form-wrapper'>
 								<form
