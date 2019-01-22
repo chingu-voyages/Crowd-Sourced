@@ -47,6 +47,7 @@ const CampaignType = new GraphQLObjectType({
 		category: { type: GraphQLString },
 		description: { type: GraphQLString },
 		location: { type: GraphQLInt },
+		email: { type: GraphQLString },
 		itemsNeeded: { type: GraphQLList(GraphQLString) },
 		user: {
 			type: UserType,
@@ -144,6 +145,7 @@ const Mutation = new GraphQLObjectType({
 				category: { type: new GraphQLNonNull(GraphQLString) },
 				description: { type: new GraphQLNonNull(GraphQLString) },
 				location: { type: new GraphQLNonNull(GraphQLInt) },
+				email: { type: new GraphQLNonNull(GraphQLString) },
 				itemsNeeded: { type: new GraphQLList(GraphQLString) }
 				//userId: { type: new GraphQLNonNull(GraphQLID) }
 			},
@@ -153,6 +155,7 @@ const Mutation = new GraphQLObjectType({
 					category: args.category,
 					description: args.description,
 					location: args.location,
+					email: args.email,
 					itemsNeeded: args.itemsNeeded
 					//userId: args.userId
 				});
