@@ -6,7 +6,7 @@ import { FormButton } from '../Components/Buttons';
 import Loading from '../Components/Loading';
 import TextInput from '../Components/TextInput';
 import '../Styles/NewCampaignPage.css';
-import { hasInput, zipCheck } from '../Components/InputChecks';
+import { hasInput, zipCheck, emailCheck } from '../Components/InputChecks';
 
 function SuccessComp() {
 	return (
@@ -52,44 +52,38 @@ export default class NewCampaignPage extends Component {
 				val: '',
 				hasError: false,
 				typeof: 'String',
-				inputCheck: hasInput
 			},
 			category: {
 				val: '',
 				hasError: false,
 				typeof: 'String',
-				inputCheck: hasInput
 			},
 			description: {
 				val: '',
 				hasError: false,
 				typeof: 'String',
-				inputCheck: hasInput
 			},
 			email: {
 				val: '',
 				hasError: false,
 				typeof: 'String',
-				inputCheck: hasInput
 			},
 			location: {
 				val: '',
 				hasError: false,
 				typeof: 'Integer',
-				inputCheck: zipCheck
 			},
 			itemsNeeded: {
 				val: '',
 				hasError: false,
 				typeof: 'List',
-				inputCheck: hasInput
 			}
 		};
 		this.checkInput = {
 			name: hasInput,
 			category: hasInput,
 			description: hasInput,
-			email: hasInput,
+			email: emailCheck,
 			location: zipCheck,
 			itemsNeeded: hasInput
 		};
