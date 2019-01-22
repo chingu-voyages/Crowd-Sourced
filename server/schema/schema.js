@@ -52,7 +52,7 @@ const CampaignType = new GraphQLObjectType({
 		user: {
 			type: UserType,
 			resolve(parent, args) {
-				return User.findById(parent.userId);
+				return User.find({ email: parent.email });
 			}
 		}
 	})
